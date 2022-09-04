@@ -1,13 +1,17 @@
 import {useState} from "react"
-import  {addContact}  from '../../redux/actions'
-import { useDispatch } from "react-redux";
+import { useGetContactsQuery,useAddContactMutation } from "redux/contactsApi";
 
 
 
 const ContactForm = () =>{
-const dispatch = useDispatch();
+
+
 const [name,setName] = useState('');
 const [number,setNumber] = useState('');
+const [addContact] = useAddContactMutation();
+const {data} = useGetContactsQuery();
+
+
 
 const handleNameChange = (e) =>{
 
@@ -18,9 +22,18 @@ const handleNumberChange = (e) =>{
   setNumber(e.target.value)
 }
 
-const onSubmitForm = (event) =>{
+const onSubmitForm = async(event) =>{
   event.preventDefault()
-  dispatch(addContact(name,number))
+
+  const isDublicate = data.find(el => el.name === name);
+    if (isDublicate) {
+      alert(`${name} is already in contacts`);
+      setName('')
+      setNumber('')
+      return data
+
+    }
+  await addContact({name:name,number:number}).unwrap();
 
   setName('')
   setNumber('')

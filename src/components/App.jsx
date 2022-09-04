@@ -1,20 +1,17 @@
-import ContactForm from "./ContactForm/ContactForm"
-import ContactList from "./ContactList/ContactList";
-import Filter from "./Filter/Filter";
+import ContactForm from './ContactForm/ContactForm';
+import ContactList from './ContactList/ContactList';
+import Filter from './Filter/Filter';
 
-
-
-const App = () =>{
- return (
+const App = () => {
+  return (
     <div>
       <h1>Phonebook</h1>
-      <ContactForm/>
+      <ContactForm />
       <h1>Contacts</h1>
-      <Filter/>
+      <Filter />
       <ContactList />
     </div>
-  )
-}
+  );
+};
 
-
-export default App
+export default App;
